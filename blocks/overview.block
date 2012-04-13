@@ -1,0 +1,15 @@
+<!-- {@|json-pretty} -->
+{.section collection}
+<div class="overview-summary">
+  {.section mainImage}
+  <figure class="main-image">
+    <a href="{collection.fullUrl}"><div class="content-fill"><img {@|image-meta} /></div></a>
+  </figure>
+  {.end}
+  <div class="summary-content">
+    <h2 class="title"><a href="{fullUrl}">{title}</a></h2>
+    <div class="body">{description|safe}</div>
+  </div>
+</div>
+{.end}
+    

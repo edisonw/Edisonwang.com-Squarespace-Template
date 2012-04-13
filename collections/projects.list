@@ -1,0 +1,37 @@
+<div class="page-type-project">
+	<div class="slideshowWrapper" id="projectWrapper-{.section collection}{id}{.end}">
+		<div class="slideshow" id="slideshow-{.section collection}{id}{.end}">
+		
+		    {.repeated section items}
+				<div class="slide">					
+					<div class="project-card">
+						<div style="margin:5px">&nbsp;</div>
+						<p class="project-title">{title}</p>
+						{.excerpt?}<div class="project-desc">{excerpt}</div>{.end}
+						<p><a href="{fullUrl}" class="read-more">Read More</a></p>
+					</div>
+					<img heightwidth="20%" {@|image-meta}>
+
+				</div>
+			{.end}
+			
+		</div>
+		<div class="slideshow-controls">
+			<div class="prev-slide">&#8676; Prev</div>
+			<div class="next-slide">Next &#8677;</div>
+		</div>
+	</div>
+</div>
+
+<!--PAGINATION-->
+	
+{.section pagination}
+<nav class="pagination">
+	<ul>
+		{.section prevPage}<li class="prev"><a href="{fullUrl}?page={@}" id="prevLink">Previous Page</a></li>
+		{.or}<li class="prev"><span title="Viewing the first page">Previous Page</span></li>{.end}
+		{.section nextPage}<li class="next"><a href="{fullUrl}?page={@}" id="nextLink">Next Page</a></li>
+		{.or}<li class="next"><span title="Viewing the last page">Next Page</span></li>{.end}
+	</ul>
+</nav>
+{.end}

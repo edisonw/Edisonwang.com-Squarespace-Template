@@ -1,0 +1,15 @@
+
+{.section socialaccount}
+	<div class="sociallink-list">
+	
+  {.repeated section @}
+  	<div class="sociallink-item" style="display: inline-block; background: grey; height:30px; width: 30px;">
+  		<a href="{profileUrl}">
+  			<div class="network" style="padding:3px; background-image: url({iconUrl}); background-repeat: no-repeat; background-position: center bottom;">&nbsp;</div>
+	  	</a>
+  	</div>
+  {.end}
+  
+	</div>
+{.end}
+

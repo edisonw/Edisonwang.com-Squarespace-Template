@@ -1,0 +1,96 @@
+<script>
+  Y.use('squarespace-comments', 'squarespace-social-buttons')
+</script>
+
+{.section item}
+
+	<article class="hentry {.repeated section categories}category-{@}{.alternates with} {.end} {.repeated section tags}tag-{@}{.alternates with} {.end} {.section author}author-{login}{.end} post-type-{recordTypeLabel} article-index-{@index}" id="article-id-{id}">
+		
+		<div class="wrapper">
+			
+			<header>
+				{.quote?}
+				
+				{.section quote}<h1 class="entry-title"><a href="{fullUrl}">{@}</a></h1>{.end}
+				
+				{.or}
+				
+				{.section title}<h1 class="entry-title"><a href="{fullUrl}">{@}</a></h1>{.end}
+				
+				{.end}
+				<div class="meta">
+					<span class="post-icon"></span>
+					<squarespace:social-share title="{title}" fullUrl="{fullUrl}" />
+					{.section author}<span class="author">by <a href="?author={login}">{displayName}</a></span>{.end}
+					{.section location}{.if addressLine2}<div class="location"><a href="//maps.google.com/maps?q={addressLine1},{addressLine2}" target="_blank" title="View map in new window">{addressTitle}</a> {addressLine2}</div>{.end}{.end}
+				</div>
+			</header>
+						
+			<section>
+				{.section body}<div class="body entry-content">{@}</div>{.end}
+			</section>
+			{.gallery?}
+			
+			<div class="gallery-image">
+				<div class="gallery-wrapper">
+			    {.repeated section items}
+					<img src="{fullUrl}?format=1000w" alt="">
+				{.end}
+				</div>
+			</div>
+			
+			{.or video?}
+			
+			{.section oembed}
+			<div class="video-wrapper">
+				<div class="video">{html}</div>
+			</div>
+			{.end}
+			
+			{.or main-image?}
+		
+			<figure class="main-image">
+				<div class="gallery-wrapper">
+					<img src="{fullUrl}?format=1000w" alt="">
+				</div>
+			</figure>
+			
+			{.end}
+
+			
+			<footer>
+				<div class="meta">
+					<span class="date"><time class="published" datetime="{addedOn|date %F}">{addedOn|date %A, %B %d, %Y}</time></span>
+					<span class="date-short"><time class="published" datetime="{addedOn|date %F}">{addedOn|date %m.%d.%y}</time></span>
+					{.section tags}<div class="tags">Tags: {.repeated section @}<a href="?tag={@}" rel="tag">{@}</a>{.alternates with}, {.end}</div>{.end}
+					{.section categories}<div class="categories">Categories: {.repeated section @}<a href="?category={@}" rel="tag">{@}</a>{.alternates with}, {.end}</div>{.end}
+					{.section source}<div class="source">Source: {@}</div>{.end}
+				</div>
+			</footer>
+			
+		</div><!-- wrapper -->
+		
+	</article>
+	
+	<div class="squarespace-comments"> 
+		<squarespace:comments itemId="{id}" />
+	</div> 
+
+{.or}
+
+	<div class="empty-page-message">How did you end up here?</div>
+
+{.end}
+
+<!--PAGINATION-->
+	
+{.section pagination}
+<nav class="pagination">
+	<ul>
+		{.if prevItem}<li class="prev"><a href="{prevItem.fullUrl}" title="{prevItem.title}" id="prevLink" >Previous</a></li>
+		{.or}<li class="prev"><span title="Viewing the latest post">Previous</span></li>{.end}
+		{.if nextItem}<li class="next"><a href="{nextItem.fullUrl}" title="{nextItem.title}" id="nextLink" >Next</a></li>
+		{.or}<li class="next"><span title="Viewing the oldest post">Next</span></li>{.end}
+	</ul>
+</nav>
+{.end}

@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+	<head>
+	
+		<meta name="viewport" content="width=device-width, maximum-scale=1.0">
+		{squarespace-headers}
+		
+		<!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    
+		<squarespace:script src="gallery-strip.js"/>
+	
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>
+    <squarespace:script src="jquery.fitvids.js"/>
+		
+	</head>
+	<body class="{squarespace.page-classes}" id="{squarespace.page-id}">
+	
+		<div id="site">
+			<div id="canvas">
+			
+				<header id="header">
+					<div class="wrapper">
+					{.section website}
+						<figure class="logo"{.if logoImageUrl} style="background-image: url({logoImageUrl}?format=500w);"{.or} style="background-image: url(/assets/no-logo.png);"{.end}><a href="/">{siteTitle}</a></figure>
+						<div class="site-info" data-content-field="site-title">
+							<p class="site-name"><a href="{baseUrl}">{siteTitle}</a>{.section siteTagLine}<span class="site-tagline" data-content-field="site-tagline"> {@}</span>{.end}</p>
+							{.section siteDescription}
+							<div class="site-bio" data-content-field="site-description">{@}</div>
+							{.or}
+							<div class="site-bio squarespace-empty-message" data-content-field="site-description"><p>A site description will help your readers understand the purpose of your site. To add one, navigate to <strong>'General -> Site Description'</strong> within Squarespace <strong>Settings</strong>. The template developer feels this is important. So, this text will show until you add your own&mdash;it's easy and three or four lines of text should do the trick.</p></div>
+							{.end}
+						</div>
+					{.end}
+						<squarespace:navigation navigationId="pageNav" template="navigation" />
+					</div>
+				</header>
+				
+				<section id="page" class="hfeed" role="main">
+					{squarespace.main-content}
+				</section>
+				
+				<footer id="footer">
+					<div class="wrapper">
+						{.section website}
+						<span class="social-icons squarespace-pseudo-block">
+							{.repeated section socialAccounts}
+							<a{.if profileUrl} href="{profileUrl}" target="_blank"{.or} title="{screenname}"{.end}><img src="/universal/images-v6/icons/icon-{serviceName}-16-dark.png"/></a>
+							{.end}
+						</span>
+						{.end}
+						<squarespace:block-field id="footerBlocks" />
+					</div>
+				</footer>
+			
+			</div><!-- #canvas -->
+		</div><!-- #site -->
+		
+	{squarespace-footers}
+	
+	
+	</body>
+</html>   
+

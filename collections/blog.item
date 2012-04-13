@@ -1,0 +1,110 @@
+<script>
+  Y.use('squarespace-comments', 'squarespace-social-buttons')
+</script>
+
+
+{.section item}
+
+	<article class="hentry{.repeated section categories} category-{@|slugify}{.alternates with} {.end} {.repeated section tags}tag-{@|slugify}{.alternates with} {.end}{.section author}{.if firstName} authored-by-{firstName|slugify}{.or} authored-by-guest{.end} author-id-{id}{.end} post-type-{recordTypeLabel} article-index-{@index}" id="article-id-{id}" data-item-id="{id}">
+		
+		<div class="wrapper">
+			
+			<header>
+				{.quote?}
+				
+				{.section quote}<h1 class="entry-title"><a href="{fullUrl}">{@}</a></h1>{.end}
+				
+				{.or link?}
+				
+				{.section title}<h1 class="entry-title"><a href="{url}" target="_blank">{@}</a></h1>{.end}
+				
+				{.or}
+				
+				{.section title}<h1 class="entry-title" data-content-field="title"><a href="{fullUrl}">{@}</a></h1>{.end}
+				
+				{.end}
+				<div class="meta">
+					<span class="post-icon"></span>
+					<squarespace:social-share title="{title}" fullUrl="{fullUrl}" />
+					{.section author}<span class="author">by <a href="?author={login}">{displayName}</a></span>{.end}
+					{.section location}{.if addressLine2}<div class="location"><a href="//maps.google.com/maps?q={addressLine1},{addressLine2}" target="_blank" title="View map in new window">{addressTitle}</a> {addressLine2}</div>{.end}{.end}
+				</div>
+			</header>
+			
+			{.gallery?}
+			
+			<div class="slideshowWrapper" id="slideshow-wrap-{id}">
+		    <div class="slideshow" id="slideshow-{id}">
+			    {.repeated section items}
+					<div class="slide">
+						<img height="100%" {@|image-meta}>
+					</div>
+				{.end}
+		    </div>
+		    <div class="slideshow-controls">
+		    	<div class="prev-slide">&#8676; Prev</div>
+		    	<div class="next-slide">Next &#8677;</div></div>
+		    </div>
+			
+			{.or video?}
+			
+  		<div class="video-wrapper">
+        <script>
+          $(document).ready(function(){
+            $("#video-{id}").fitVids();
+          });
+        </script>
+  			<div id="video-{id}" class="video">{oembed.html}</div>
+  		</div>
+			
+			{.or main-image?}
+		
+			<figure class="main-image">
+				<div class="gallery-wrapper">
+					<img src="{fullUrl}?format=1000w" alt="">
+				</div>
+			</figure>
+			
+			{.end}
+			
+			<section>
+				{.section body}<div class="body entry-content">{@}</div>{.end}
+			</section>
+			
+			<footer>
+				<div class="meta">
+				  {.link?}<span class="link-more"><a class="read-more" href="{url}" target="_blank">Visit Link</a></span>{.or}{.section sourceUrl}<span class="source"><a href="{@}" target="new">Source</a></span>{.end}{.end}
+					<span class="date"><time class="published" datetime="{addedOn|date %F}">{addedOn|date %A, %B %d, %Y}</time></span>
+					<span class="date-short"><time class="published" datetime="{addedOn|date %F}">{addedOn|date %m.%d.%y}</time></span>
+					{.section tags}<div class="tags">Tags: {.repeated section @}<a href="{collection.fullUrl}?tag={@}" rel="tag">{@}</a>{.alternates with}, {.end}</div>{.end}
+					{.section categories}<div class="categories">Categories: {.repeated section @}<a href="{collection.fullUrl}?category={@}" rel="tag">{@}</a>{.alternates with}, {.end}</div>{.end}
+					
+				</div>
+			</footer>
+			
+		</div><!-- wrapper -->
+		
+	</article>
+	
+	<div class="squarespace-comments"> 
+		<squarespace:comments itemId="{id}" />
+	</div> 
+
+{.or}
+
+	<div class="empty-page-message">How did you end up here?</div>
+
+{.end}
+
+<!--PAGINATION-->
+	
+{.section pagination}
+<nav class="pagination">
+	<ul>
+		{.if prevItem}<li class="prev"><a href="{prevItem.fullUrl}" title="{prevItem.title}" id="prevLink" >Previous</a></li>
+		{.or}<li class="prev"><span title="Viewing the latest post">Previous</span></li>{.end}
+		{.if nextItem}<li class="next"><a href="{nextItem.fullUrl}" title="{nextItem.title}" id="nextLink" >Next</a></li>
+		{.or}<li class="next"><span title="Viewing the oldest post">Next</span></li>{.end}
+	</ul>
+</nav>
+{.end}

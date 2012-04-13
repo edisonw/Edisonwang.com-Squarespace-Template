@@ -1,0 +1,19 @@
+<nav class="main-nav" role="navigation">
+	<ul>
+	  {.repeated section items}
+	  
+	    {.if collection}
+	      <li class="{collection.typeLabel}-collection{.section active} active-link{.end}">
+	        <a href="{collection.fullUrl}">{collection.title}</a>
+	      </li>
+	    {.end}
+	    
+	    {.section externalLink}
+	      <li class="external-link">
+	        <a href="{url}"{.section newWindow} target="_blank"{.end}>{title}</a>
+	      </li>
+	    {.end}
+	  
+	  {.end}
+	</ul>
+</nav>

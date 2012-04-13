@@ -1,0 +1,142 @@
+<script>Y.use('squarespace-social-buttons')</script> 
+
+{.repeated section items}
+
+<article class="hentry{.repeated section categories} category-{@|slugify}{.alternates with} {.end}{.repeated section tags} tag-{@|slugify}{.alternates with} {.end}{.section author}{.if firstName} authored-by-{firstName|slugify}{.or} authored-by-guest{.end} author-id-{id}{.end} post-type-{recordTypeLabel} article-index-{@index}" id="article-{id}" data-item-id="{id}">
+
+	<div class="wrapper">
+	<!--POST HEADER-->
+	
+	  {.quote?}
+	  
+			<header>
+				{.section quote}<h1 class="entry-title"><a href="{fullUrl}">{@}</a></h1>{.end}
+				{.section source}<p class="source">&mdash; {@}</p>{.end}
+				<div class="meta">
+					{.section author}<span class="author">by <a href="?author={login}">{displayName}</a></span>{.end} 
+					{.section location}{.if addressLine2}<div class="location"><a href="//maps.google.com/maps?q={addressLine1},{addressLine2}" target="_blank" title="View map in new window">{addressTitle}</a> {addressLine2}</div>{.end}{.end}
+					<span class="post-icon"></span>
+					<squarespace:social-share title="{title}" fullUrl="{fullUrl}" />
+				</div>
+			</header>
+	  
+	  {.or link?}
+	  
+			<header>
+				{.section title}<h1 class="entry-title"><a href="{url}" target="_blank">{@}</a></h1>{.end}
+				<div class="meta">
+					{.section author}<span class="author">by <a href="?author={login}">{displayName}</a></span>{.end} 
+					{.section location}{.if addressLine2}<div class="location"><a href="//maps.google.com/maps?q={addressLine1},{addressLine2}" target="_blank" title="View map in new window">{addressTitle}</a> {addressLine2}</div>{.end}{.end}
+					<span class="post-icon"></span>
+					<squarespace:social-share title="{title}" fullUrl="{fullUrl}" />
+				</div>
+			</header>
+	  
+	  {.or} {# all other post types}
+	  
+			<header>
+				{.section title}<h1 class="entry-title" data-content-field="title"><a href="{fullUrl}">{@}</a></h1>{.end}
+				<div class="meta">
+					{.section author}<span class="author">by <a href="?author={login}">{displayName}</a></span>{.end} 
+					{.section location}{.if addressLine2}<div class="location"><a href="//maps.google.com/maps?q={addressLine1},{addressLine2}" target="_blank" title="View map in new window">{addressTitle}</a> {addressLine2}</div>{.end}{.end}
+					<span class="post-icon"></span>
+					<squarespace:social-share title="{title}" fullUrl="{fullUrl}" />
+				</div>
+			</header>
+	  
+	  {.end}
+	  
+	  
+	<!--POST BODY-->
+	  
+			
+		{.gallery?}
+		
+		<div class="slideshowWrapper" id="slideshow-wrap-{id}">
+	    <div class="slideshow" id="slideshow-{id}">
+		    {.repeated section items}
+				<div class="slide">
+					<img height="100%" {@|image-meta}>
+				</div>
+			{.end}
+	    </div>
+	    <div class="slideshow-controls">
+	    	<div class="prev-slide">&#8676; Prev</div>
+	    	<div class="next-slide">Next &#8677;</div>
+	    </div>
+    </div>
+		
+		{.or video?}
+		
+		<div class="video-wrapper">
+      <script>
+        $(document).ready(function(){
+          $("#video-{id}").fitVids();
+        });
+      </script>
+			<div id="video-{id}" class="video">{oembed.html}</div>
+		</div>
+			
+		{.or} {# all other post types}
+		  
+    {.main-image?}
+		<figure class="main-image">
+			<div class="gallery-wrapper">
+				<img src="{fullUrl}?format=1000w" alt="">
+			</div>
+		</figure>
+    {.end}
+	    
+	    <section>
+	  		{.excerpt?}
+	  			<div class="body entry-content">{excerpt}</div>
+	  		{.or}
+	  			{.section body}<div class="body entry-content">{@}</div>{.end}
+	  		{.end}
+	  	</section>
+		  
+		{.end}
+			
+			
+			
+			
+	<!--POST FOOTER-->
+			
+		<footer>
+			<div class="meta">
+				{.link?}<span class="link-more"><a class="read-more" href="{url}" target="_blank">Visit Link</a></span>
+				{.or excerpt?}<a class="read-more" href="{fullUrl}">read more</a>
+				{.or external-video?}<span class="video-more"><a class="read-more" href="{fullUrl}">Full Post</a></span>{.section sourceUrl}<span class="source"><a href="{@}" target="new">Source</a></span>{.end}
+				{.or gallery?}<span class="slideshow-more"><a class="read-more" href="{fullUrl}">Full Post</a></span>
+				{.or}{.section sourceUrl}<span class="source"><a href="{@}" target="new">Source</a></span>{.end}
+				{.end}
+				
+				<span class="date"><time class="published" datetime="{addedOn|date %F}"><a href="{fullUrl}">{addedOn|date %A, %B %d, %Y}</a></time></span>
+				<span class="date-short"><time class="published" datetime="{addedOn|date %F}"><a href="{fullUrl}">{addedOn|date %m.%d.%y}</a></time></span>
+				{.section publicCommentCount}<span class="comments"><a href="{fullUrl}#comments-{id}">{@} Comment{@|pluralize}</a></span>{.end}
+				{.section tags}<div class="tags">tags: {.repeated section @}<a href="{collection.fullUrl}?tag={@}" rel="tag">{@}</a>{.alternates with}, {.end}</div>{.end}
+				{.section categories}<div class="categories">categories: {.repeated section @}<a href="{collection.fullUrl}?category={@}" rel="tag">{@}</a>{.alternates with}, {.end}</div>{.end}
+			</div>
+		</footer>
+	  
+	</div><!-- wrapper -->
+	
+</article>
+{.end}
+
+
+
+<!--PAGINATION-->
+	
+{.if pagination}
+<nav class="pagination">
+	<ul>
+		{.if pagination.prevPage}<li class="prev"><a href="{fullUrl}?page={pagination.prevPage}{.section authorFilter}&author={@}{.end}{.section monthFilter}&month={@}{.end}{.section categoryFilter}&category={@}{.end}{.section tagFilter}&tag={@}{.end}" id="prevLink">Previous</a></li>
+		{.or}<li class="prev"><span title="Viewing the first page">Previous</span></li>{.end}
+		<li>{pagination.currentPage} of {pagination.totalPages}</li>
+		{.if pagination.nextPage}<li class="next"><a href="{fullUrl}?page={pagination.nextPage}{.section authorFilter}&author={@}{.end}{.section monthFilter}&month={@}{.end}{.section categoryFilter}&category={@}{.end}{.section tagFilter}&tag={@}{.end}" id="nextLink">Next</a></li>
+		{.or}<li class="next"><span title="Viewing the last page">Next</span></li>{.end}
+	</ul>
+</nav>
+{.end}
+

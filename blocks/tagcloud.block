@@ -1,0 +1,22 @@
+<!--{@|json-pretty}-->
+{.section items}
+
+		<ul class="tagcloud-list">
+		
+		{.repeated section @}
+			
+				<li class="tagcloud-item" title="{name|html} - {count}" style="font-size: {weight}em; opacity: {orignalWeight};">
+					<a href="{url|htmlattr}">
+						<span class="name">{name|html}</span>
+						<span class="count">{count}</span>
+					</a>
+				</li>
+			
+		{.end}
+		
+		</ul>
+		
+{.end}
+
+
+
